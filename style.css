@@ -22,6 +22,25 @@ body {
   height: 100dvh;
   overflow-y: auto;
   position: relative;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 100px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   &:after {
     position: absolute;
     content: "";
@@ -110,13 +129,14 @@ body {
     }
   }
   .weather__info {
-    height: calc(100vh - 144px);
+    /* height: calc(100vh - 144px); */
     overflow-y: auto;
+    padding-bottom: 20px;
     .weather__info-container {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
       gap: 20px;
-      grid-template-rows: 2fr 1fr;
+      grid-template-rows: 2fr 1.1fr;
       height: 100%;
     }
 
@@ -151,11 +171,13 @@ body {
       );
       transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
       backdrop-filter: blur(5px);
-      padding: 40px;
+      padding: clamp(10px, 5vw, 40px);
       display: grid;
       grid-template-columns: 1.5fr 3fr;
       gap: 40px;
-
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
       .current {
         display: flex;
         flex-direction: column;
@@ -191,7 +213,7 @@ body {
       .hourly {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: clamp(10px, 5vw, 40px);
 
         .hourly__items {
           display: flex;
@@ -199,7 +221,10 @@ body {
           gap: 20px;
           overflow-y: auto;
           max-height: 370px;
-          padding-right: 40px;
+          padding-right: clamp(10px, 5vw, 40px);
+          @media (max-width: 525px) {
+            padding-right: 5px;
+          }
           &::-webkit-scrollbar {
             width: 5px;
           }
@@ -232,7 +257,8 @@ body {
             );
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: clamp(10px, 2.5vw, 20px);
             align-items: center;
             .weather {
               display: flex;
@@ -242,7 +268,7 @@ body {
                 width: 40px;
               }
             }
-            &.active{
+            &.active {
               background-color: green;
             }
           }
@@ -250,8 +276,31 @@ body {
       }
     }
     .weekly {
-      display: flex;
+      display: grid;
       gap: 20px;
+      grid-template-columns: repeat(6, 1fr);
+      overflow-x: auto;
+      padding-bottom: 10px;
+      &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 100px;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
       .item {
         border-radius: 8px;
         border: 1px solid #fff;
@@ -264,12 +313,14 @@ body {
         );
         transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
         backdrop-filter: blur(5px);
-        padding: 40px;
+        padding: clamp(10px, 5vw, 40px);
         text-align: center;
         display: flex;
         flex-direction: column;
         gap: 10px;
         justify-content: center;
+        min-width: 223px;
+
         .weather__icon {
           width: 50%;
           margin-inline: auto;
@@ -290,9 +341,8 @@ body {
 }
 
 .skeleton {
-
   &.skeleton-active {
-      position: relative;
+    position: relative;
     &:before {
       content: "";
       position: absolute;
