@@ -111,7 +111,7 @@ async function fetchWeatherData(places) {
 
     const hourlyWeatherInfo = data.days[0].hours;
     const weeklyWeatherInfo = data.days.slice(1, 7);
-
+     changeBackground(currentWeatherInfo.icon);
     currentDayWeather(currentWeatherInfo);
     hourlyForecast(hourlyWeatherInfo);
     weeklyForecast(weeklyWeatherInfo);
@@ -258,6 +258,16 @@ function currentTime(timestr) {
 
 function addLoader() {
   document.querySelectorAll('.skeleton').forEach(el => el.classList.add('skeleton-active'));
+}
+
+
+function changeBackground(icon){
+  document.querySelector('.weather__container .bg').innerHTML="";
+  const content =
+   `
+    <img src="./bg/${icon}.jpg" alt="">
+   `
+   document.querySelector('.weather__container .bg').insertAdjacentHTML("afterbegin", content);
 }
 
 

@@ -185,8 +185,10 @@ body {
         text-align: center;
         justify-content: center;
         .weather__icon {
+          max-height: 100px;
           img {
-            width: 30%;
+            width: 100%;
+            height: 100%;
           }
         }
         .location {
@@ -322,8 +324,13 @@ body {
         min-width: 223px;
 
         .weather__icon {
+          max-height: 50px;
           width: 50%;
           margin-inline: auto;
+          img{
+            width: 100%;
+            height: 100%;
+          }
         }
 
         .location {
